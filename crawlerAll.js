@@ -13,10 +13,10 @@ mongoose.connection.on('connected', function(){
 // 要爬取的目标路径
 let targetUrls = []
 // 要爬取的总共页数(可以根据自己需求修改)
-let targetPageSize = 10
+let targetPageSize = 2 // 爬取两页
 for (let i = 1; i <= targetPageSize; i++) {
   // 将抓取目标分页路径存入数组
-  targetUrls.push(`https://www.hua.com/flower/?r=0&pg=${i}`)
+  targetUrls.push(`https://www.qichacha.com/search_index?key=%25E5%259B%25BD%25E7%25BD%2591%25E6%2596%25B0%25E7%2596%2586%25E7%2594%25B5%25E5%258A%259B&ajaxflag=1&p=${i}&`)
 }
 let targetDatas = []
 targetUrls.forEach(function(targetUrl, index) {
@@ -24,22 +24,24 @@ targetUrls.forEach(function(targetUrl, index) {
     if (data) {
       /* 分析爬取的页面信息获取想要的内容 */
       let $ = cheerio.load(data)
-      let goodsItemList = $('.grid-item')
+      let goodsItemList = $('#search-result tr')
       goodsItemList.each(function(item){
-        let imgSrc = $(this).find('a').children('img').attr('src')
-        let price = $(this).find('.price-num').text() 
-        let describe = $(this).find('.product-title').text()
+        let name = $(this).find('td').eq(2).children('a').text()
+        let phone =  $(this).find('td').eq(2).children('p').eq(1).find('.m-l').text()
+        let address = $(this).find('td').eq(2).children('p').eq(2).text()
         targetDatas.push({
-          imgSrc,
-          price,
-          describe
+          name,
+          phone,
+          address
         })
       })
+      console.log(targetDatas)
     } else {
       console.log('未爬取到内容！')
     }
   })
-  if (index === (targetPageSize - 1)) {
+  if (index === (targetPageSize - 1)) {// 最后一页
+    
     /* 抓取内容时异步操作的，因此需要加个定时器，等内容都抓取完且都解析之后在写入json文件 */
     setTimeout(() => {
       let totalDatas = JSON.stringify(targetDatas)
