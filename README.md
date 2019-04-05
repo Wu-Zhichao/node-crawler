@@ -17,7 +17,3 @@
 
 ## Author
 wuzhichao
-
-
-https://www.qichacha.com/search_index?key=%25E5%259B%25BD%25E7%25BD%2591%25E6%25B9%2596%25E5%258C%2597%25E7%259C%2581%25E7%2594%25B5%25E5%258A%259B&ajaxflag=1&p=2&
-https://www.qichacha.com/search_index?key=%25E5%259B%25BD%25E7%25BD%2591%25E6%25B9%2596%25E5%258C%2597%25E7%259C%2581%25E7%2594%25B5%25E5%258A%259B&ajaxflag=1&p=3&
